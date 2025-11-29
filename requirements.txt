@@ -1,7 +1,13 @@
 fastapi
 uvicorn[standard]
-chromadb
+chromadb==0.4.24
 openai
 markdown-it-py
 python-dotenv
 tiktoken
+streamlit
+google-genai
+tqdm
+python-dotenv
+langchain-text-splitters
+langchain-core
