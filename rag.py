@@ -57,12 +57,11 @@ class GoogleEmbeddingFunction:
 # === 2. Chroma client & collection (load existing index) ===
 chroma_client = chromadb.PersistentClient(path="mkdocs_db/")
 
-google_ef = GoogleEmbeddingFunction(model_name="models/text-embedding-004")
-
+# We don't attach an embedding_function here; we'll embed manually.
 collection = chroma_client.get_or_create_collection(
     name="MkDocs",
-    embedding_function=google_ef,
 )
+
 
 
 # === 3. RAG logic (same as in notebook) ===
