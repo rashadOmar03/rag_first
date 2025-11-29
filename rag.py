@@ -6,7 +6,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 import chromadb
-import chromadb.utils.embedding_functions as embedding_functions
+
 from google import genai
 
 
