@@ -12,10 +12,18 @@ from google import genai
 
 # === 1. Load API key ===
 load_dotenv()
+
+# Try environment variable first (local or cloud)
 api_key_google = os.getenv("GOOGLE_API_KEY")
 
+# Fallback: try Streamlit secrets (Cloud)
 if not api_key_google:
-    raise ValueError("GOOGLE_API_KEY not found in environment. Check your .env file.")
+    api_key_google = st.secrets.get("GOOGLE_API_KEY")
+
+# If still missing, stop app with a nice error message
+if not api_key_google:
+    st.error("GOOGLE_API_KEY not found. Set it in a .env file (locally) or in Streamlit Secrets (on the cloud).")
+    st.stop()
 
 client = genai.Client(api_key=api_key_google)
 
