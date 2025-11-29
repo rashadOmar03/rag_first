@@ -27,6 +27,33 @@ if not api_key_google:
 
 client = genai.Client(api_key=api_key_google)
 
+class GoogleEmbeddingFunction:
+    """
+    Custom embedding function for Chroma that uses google-genai
+    (from google import genai) and the text-embedding-004 model.
+    """
+
+    def __init__(self, model_name: str = "models/text-embedding-004"):
+        self.model_name = model_name
+
+    def __call__(self, texts):
+        # Chroma will pass a list of strings, but sometimes a single string.
+        if isinstance(texts, str):
+            texts = [texts]
+
+        embeddings = []
+        for t in texts:
+            resp = client.models.embed_content(
+                model=self.model_name,
+                contents=t,
+            )
+            # For google-genai, the embedding is here:
+            vec = resp.embedding.values
+            embeddings.append(vec)
+
+        return embeddings
+
+
 # === 2. Chroma client & collection (load existing index) ===
 chroma_client = chromadb.PersistentClient(path="mkdocs_db/")
 
