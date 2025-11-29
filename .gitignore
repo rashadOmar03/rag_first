@@ -1,0 +1,22 @@
+# API keys / secrets
+.env
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Chroma DB and generated data
+mkdocs_db/
+mkdocs_split_data.pkl
+
+# Jupyter noise
+.ipynb_checkpoints/
+__pycache__/
+
+# Extra projects not related to this repo
+MedicalGPT/
+RAG/
+
+# MkDocs repo 
+mkdocs/
